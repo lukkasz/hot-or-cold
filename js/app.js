@@ -51,20 +51,23 @@ $(document).ready(function(){
 	var count = 0,
 		feedback = $('#feedback'),
 		feedbackDefault = feedback.text(),
+		guessButton = $('#guessButton'),
+		guessList = $('#guessList'),
+		userGuess = $('#userGuess'),
 		randomNumber;
 
 	function numberGenerator() {
-			return Math.floor((Math.random()*100)+1);
+		return Math.floor((Math.random()*100)+1);
 	};
 
 	function newGame(){
 		randomNumber = numberGenerator();	
 		count = 0;
-		$('#guessList').empty();
+		guessList.empty();
 		feedback.text(feedbackDefault);
 		$("#count").text(count);
-		$('#guessButton').attr("disabled",false);
-		$('#userGuess').attr("disabled",false);
+		guessButton.attr("disabled",false);
+		userGuess.attr("disabled",false);
 		console.log(randomNumber);
 		console.log(feedbackDefault);
 		/*return location.reload(true);		*/
@@ -80,8 +83,8 @@ $(document).ready(function(){
 	function getFeedback(number) {
 		
 		if ( number == 0) {
-			$('#guessButton').attr("disabled",true);
-			$('#userGuess').attr("disabled",true);
+			guessButton.attr("disabled",true);
+			userGuess.attr("disabled",true);
 			return feedback.text("Correct");
 		}
 		else if ( number <= 10 ) {
@@ -107,16 +110,15 @@ $(document).ready(function(){
 
 	/*--- Get user guess when click on Guess button---*/
 		
-	$('#guessButton').on('click', function(e){
+	guessButton.on('click', function(e){
 		e.preventDefault();
-		var userGuess = $('#userGuess');
 
 		if ((+userGuess.val() < 1) || (+userGuess.val() > 100) || (!+userGuess.val())) {
 			alert("Please enter an number between 1 and 100!!");
 		} else {
 			count++;
 			getFeedback(Math.abs(userGuess.val() - randomNumber));
-			$('#guessList').prepend('<li>' + userGuess.val() + '</li>');	
+			guessList.prepend('<li>' + userGuess.val() + '</li>');	
 			$("#count").text(count);
 		}
 
