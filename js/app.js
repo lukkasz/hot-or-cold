@@ -81,13 +81,12 @@ $(document).ready(function(){
 	/*-- function that take return feedback --*/
 
 	function getFeedback(number) {
-		
 		if ( number == 0) {
 			guessButton.attr("disabled",true);
 			userGuess.attr("disabled",true);
 			return feedback.text("Correct");
 		}
-		else if ( number <= 10 ) {
+		else if ( number <= 10 ){
 			return feedback.text("Very Hot");
 		} 
 		else if ( number <= 20 ) {
