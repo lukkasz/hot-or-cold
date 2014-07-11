@@ -49,11 +49,11 @@
 $(document).ready(function(){
 
 	var count = 0,
-		feedback = $('#feedback'),
-		feedbackDefault = feedback.text(),
-		guessButton = $('#guessButton'),
-		guessList = $('#guessList'),
-		userGuess = $('#userGuess'),
+		$feedback = $('#feedback'),
+		$feedbackDefault = $feedback.text(),
+		$guessButton = $('#guessButton'),
+		$guessList = $('#guessList'),
+		$userGuess = $('#userGuess'),
 		randomNumber;
 
 	function numberGenerator() {
@@ -63,13 +63,13 @@ $(document).ready(function(){
 	function newGame(){
 		randomNumber = numberGenerator();	
 		count = 0;
-		guessList.empty();
-		feedback.text(feedbackDefault);
+		$guessList.empty();
+		$feedback.text($feedbackDefault);
 		$("#count").text(count);
-		guessButton.attr("disabled",false);
-		userGuess.attr("disabled",false);
+		$guessButton.attr("disabled",false);
+		$userGuess.attr("disabled",false);
 		console.log(randomNumber);
-		console.log(feedbackDefault);
+		console.log($feedbackDefault);
 		/*return location.reload(true);		*/
 	};
 
@@ -82,24 +82,24 @@ $(document).ready(function(){
 
 	function getFeedback(number) {
 		if ( number == 0) {
-			guessButton.attr("disabled",true);
-			userGuess.attr("disabled",true);
-			return feedback.text("Correct");
+			$guessButton.attr("disabled",true);
+			$userGuess.attr("disabled",true);
+			return $feedback.text("Correct");
 		}
 		else if ( number <= 10 ){
-			return feedback.text("Very Hot");
+			return $feedback.text("Very Hot");
 		} 
 		else if ( number <= 20 ) {
-			return feedback.text("Hot");
+			return $feedback.text("Hot");
 		}
 		else if ( number <= 30 ){
-			return feedback.text("Warm");
+			return $feedback.text("Warm");
 		} 
 		else if ( number <= 50 ) {
-			return feedback.text("Cold");
+			return $feedback.text("Cold");
 		} 
 		else {
-			return feedback.text("Ice Cold");
+			return $feedback.text("Ice Cold");
 		}
 
 	};
@@ -109,19 +109,19 @@ $(document).ready(function(){
 
 	/*--- Get user guess when click on Guess button---*/
 		
-	guessButton.on('click', function(e){
+	$guessButton.on('click', function(e){
 		e.preventDefault();
 
-		if ((+userGuess.val() < 1) || (+userGuess.val() > 100) || (!+userGuess.val())) {
+		if ((+$userGuess.val() < 1) || (+$userGuess.val() > 100) || (!+$userGuess.val())) {
 			alert("Please enter an number between 1 and 100!!");
 		} else {
 			count++;
-			getFeedback(Math.abs(userGuess.val() - randomNumber));
-			guessList.prepend('<li>' + userGuess.val() + '</li>');	
+			getFeedback(Math.abs($userGuess.val() - randomNumber));
+			$guessList.prepend('<li>' + $userGuess.val() + '</li>');	
 			$("#count").text(count);
 		}
 
-		userGuess.val('');
+		$userGuess.val('');
 
 	});
 
